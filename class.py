@@ -4,5 +4,5 @@ class Ingredient :
         self.nom = nom
         self.prix = prix
         self.paquets = paquets
-        self.est_Frais = est_frais
+        self.est_frais = est_frais
         
