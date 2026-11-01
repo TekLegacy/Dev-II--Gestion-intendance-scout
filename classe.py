@@ -76,3 +76,10 @@ class Menu:
 
     def ajout_recette(self, new_recette):
         self.all_recette.append(new_recette)
+
+    def supprime_recette(self, old_recette):
+        temporaire = []
+        for i in self.all_recette:
+            if i != old_recette:
+                temporaire.append(i)
+        self.all_recette = temporaire
