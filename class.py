@@ -1,5 +1,4 @@
 #fichier contenant les classes
-#test
 
 class Recette:
     def __init__(self, nom_recette : str, nbr_ingredients : int):
@@ -27,4 +26,11 @@ class Recette:
         self.ingredient = temp_l
         self.nbr_ingredients = len(temp_l)
 
+        
+class Ingredient : 
+    def __init__(self,nom : str, prix : float, paquets : int, est_frais : bool):
+        self.nom = nom
+        self.prix = prix
+        self.paquets = paquets
+        self.est_frais = est_frais
         
