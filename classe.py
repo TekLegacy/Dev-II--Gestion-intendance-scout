@@ -55,3 +55,14 @@ class Ingredient :
 
     def __str__(self):
         return f"L'ingrédient : {self.nom} coûte {self.prix}, s'achète par paquet de {self.paquets}, est frais : {self.est_frais}"   
+
+
+class Menu:
+    def __init__(self):
+        self.all_recette = []
+
+    def cacul_cout(self,recette):
+        cout = 0
+        for i in recette:
+            cout += i.prix
+        return cout
