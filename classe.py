@@ -82,4 +82,10 @@ class Menu:
         for i in self.all_recette:
             if i != old_recette:
                 temporaire.append(i)
-        self.all_recette = temporaire
+        if len(temporaire) < len(self.all_recette):
+            self.all_recette = temporaire
+            return "La recette a bien ete supprime de la liste"
+        return 'erreur'
+
+    def __str__(self): # en cours
+        return f"Le menu contient {len(self.all_recette)} recettes"
