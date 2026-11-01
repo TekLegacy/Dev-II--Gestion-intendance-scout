@@ -1,6 +1,5 @@
 #fichier contenant les classes
 
-
 class Camp:
     def __init__(self, nb_jours = 0, nb_personnes_total = 0, budget_jour_personne = 0, nb_pers_tranche = [0, 0, 0]):
         self.nb_jours = nb_jours
