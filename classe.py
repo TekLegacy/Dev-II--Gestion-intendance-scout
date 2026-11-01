@@ -14,6 +14,8 @@ class Camp:
 
     def deduire_cout(self, cout):
         self.budget -= cout
+
+
 class Recette:
     def __init__(self, nom_recette : str, nbr_ingredients : int):
         self.nom_recette = nom_recette
@@ -23,10 +25,10 @@ class Recette:
 
     def ajout_ingredient(self):
         for i in range(self.nbr_ingredients):
-            nom = input("le nom de l'ingédient ? : ")
-            prix = input("son prix ? : ")
-            paquet = input("quelle est son prix ? : ")
-            est_frais = input("est-il frais ? (True ou False) : ")
+            nom = str(input("le nom de l'ingédient ? : "))
+            prix = float(input("son prix ? : "))
+            paquet = int(input("quelle est sa taille ? : "))
+            est_frais = bool(input("est-il frais ? (True ou False) : "))
 
             ing = Ingredient(nom, prix, paquet, est_frais)
 
@@ -39,6 +41,9 @@ class Recette:
                 temp_l.append(i)
         self.ingredient = temp_l
         self.nbr_ingredients = len(temp_l)
+
+    def __str__(self):
+        return f"La recette {self.nom_recette} comporte {self.nbr_ingredients} ingrédients."
 
         
 class Ingredient : 
