@@ -14,6 +14,8 @@ class Camp:
 
     def deduire_cout(self, cout):
         self.budget -= cout
+
+
 class Recette:
     def __init__(self, nom_recette : str, nbr_ingredients : int):
         self.nom_recette = nom_recette
@@ -23,12 +25,12 @@ class Recette:
 
     def ajout_ingredient(self):
         for i in range(self.nbr_ingredients):
-            nom = input("le nom de l'ingédient ? : ")
-            prix = input("son prix ? : ")
-            paquet = input("quelle est son prix ? : ")
-            est_frais = input("est-il frais ? (True ou False) : ")
+            nom = str(input("le nom de l'ingédient ? : "))
+            prix = float(input("son prix ? : "))
+            paquet = int(input("quelle est sa taille ? : "))
+            est_frais = bool(input("est-il frais ? (True ou False) : "))
 
-            ing = Ingredients(nom, prix, paquet, est_frais)
+            ing = Ingredient(nom, prix, paquet, est_frais)
 
             self.ingredient.append(ing)
 
@@ -40,6 +42,9 @@ class Recette:
         self.ingredient = temp_l
         self.nbr_ingredients = len(temp_l)
 
+    def __str__(self):
+        return f"La recette {self.nom_recette} comporte {self.nbr_ingredients} ingrédients."
+
         
 class Ingredient : 
     def __init__(self,nom : str, prix : float, paquets : int, est_frais : bool):
@@ -47,4 +52,41 @@ class Ingredient :
         self.prix = prix
         self.paquets = paquets
         self.est_frais = est_frais
-        
+
+    def __str__(self):
+        return f"L'ingrédient : {self.nom} coûte {self.prix}, s'achète par paquet de {self.paquets}, est frais : {self.est_frais}"   
+
+
+class Menu:
+    def __init__(self):
+        self.all_recette = []
+
+    def cacul_cout(self,recette):
+        cout = 0
+        for i in recette.ingredient:
+            cout += i.prix
+        return cout
+
+    def contient_frais(self, recette):
+        for i in recette.ingredient:
+            if i.est_frais == True:
+                return True
+            else:
+                return False
+
+    def ajout_recette(self, new_recette):
+        self.all_recette.append(new_recette)
+        return 'La recette a bien été ajouter au menu'
+
+    def supprime_recette(self, old_recette):
+        temporaire = []
+        for i in self.all_recette:
+            if i != old_recette:
+                temporaire.append(i)
+        if len(temporaire) < len(self.all_recette):
+            self.all_recette = temporaire
+            return "La recette a bien ete supprime de la liste"
+        return 'erreur'
+
+    def __str__(self): # en cours
+        return f"Le menu contient {len(self.all_recette)} recettes"
