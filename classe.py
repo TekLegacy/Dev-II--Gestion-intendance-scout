@@ -47,4 +47,6 @@ class Ingredient :
         self.prix = prix
         self.paquets = paquets
         self.est_frais = est_frais
-        
+
+    def __str__(self):
+        return f"L'ingrédient : {self.nom} coûte {self.prix}, s'achète par paquet de {self.paquets}, est frais : {self.est_frais}"   
