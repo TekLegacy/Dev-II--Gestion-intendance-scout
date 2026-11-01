@@ -73,3 +73,6 @@ class Menu:
                 return True
             else:
                 return False
+
+    def ajout_recette(self, new_recette):
+        self.all_recette.append(new_recette)
