@@ -76,6 +76,7 @@ class Menu:
 
     def ajout_recette(self, new_recette):
         self.all_recette.append(new_recette)
+        return 'La recette a bien été ajouter au menu'
 
     def supprime_recette(self, old_recette):
         temporaire = []
