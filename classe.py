@@ -63,7 +63,7 @@ class Menu:
 
     def cacul_cout(self,recette):
         cout = 0
-        for i in recette:
+        for i in recette.ingredient:
             cout += i.prix
         return cout
 
@@ -76,10 +76,17 @@ class Menu:
 
     def ajout_recette(self, new_recette):
         self.all_recette.append(new_recette)
+        return 'La recette a bien été ajouter au menu'
 
     def supprime_recette(self, old_recette):
         temporaire = []
         for i in self.all_recette:
             if i != old_recette:
                 temporaire.append(i)
-        self.all_recette = temporaire
+        if len(temporaire) < len(self.all_recette):
+            self.all_recette = temporaire
+            return "La recette a bien ete supprime de la liste"
+        return 'erreur'
+
+    def __str__(self): # en cours
+        return f"Le menu contient {len(self.all_recette)} recettes"
