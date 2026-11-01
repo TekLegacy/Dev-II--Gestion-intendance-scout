@@ -66,3 +66,10 @@ class Menu:
         for i in recette:
             cout += i.prix
         return cout
+
+    def contient_frais(self, recette):
+        for i in recette.ingredient:
+            if i.est_frais == True:
+                return True
+            else:
+                return False
