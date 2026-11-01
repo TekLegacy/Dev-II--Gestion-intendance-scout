@@ -63,7 +63,7 @@ class Menu:
 
     def cacul_cout(self,recette):
         cout = 0
-        for i in recette:
+        for i in recette.ingredient:
             cout += i.prix
         return cout
 
