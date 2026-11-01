@@ -28,7 +28,7 @@ class Recette:
             paquet = input("quelle est son prix ? : ")
             est_frais = input("est-il frais ? (True ou False) : ")
 
-            ing = Ingredients(nom, prix, paquet, est_frais)
+            ing = Ingredient(nom, prix, paquet, est_frais)
 
             self.ingredient.append(ing)
 
