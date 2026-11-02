@@ -24,15 +24,24 @@ class Recette:
         self.ingredient = []
 
     def ajout_ingredient(self):
-        for i in range(self.nbr_ingredients):
+        if len(self.ingredient) == 0:
+            for i in range(self.nbr_ingredients):
+                nom = str(input("le nom de l'ingédient ? : "))
+                prix = float(input("son prix ? : "))
+                paquet = int(input("quelle est sa taille ? : "))
+                est_frais = bool(input("est-il frais ? (True ou False) : "))
+
+                ing = Ingredient(nom, prix, paquet, est_frais)
+                self.ingredient.append(ing)
+        else:
             nom = str(input("le nom de l'ingédient ? : "))
             prix = float(input("son prix ? : "))
             paquet = int(input("quelle est sa taille ? : "))
             est_frais = bool(input("est-il frais ? (True ou False) : "))
-
             ing = Ingredient(nom, prix, paquet, est_frais)
-
             self.ingredient.append(ing)
+            self.nbr_ingredients += 1
+
 
     def supprimer_ingredient(self, ingre):
         temp_l = []
@@ -43,7 +52,7 @@ class Recette:
         self.nbr_ingredients = len(temp_l)
 
     def __str__(self):
-        return f"La recette {self.nom_recette} comporte {self.nbr_ingredients} ingrédients."
+        return f"La recette {self.nom_recette} contient {self.nbr_ingredients} ingrédients."
 
         
 class Ingredient : 
