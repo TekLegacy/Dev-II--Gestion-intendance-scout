@@ -1,2 +1,2 @@
 #fichier contenant le script
-from classe import Recette, Ingredient, Camp
+from classe import Recette, Ingredient, Camp, Menu
