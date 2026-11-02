@@ -1,2 +1,41 @@
 #fichier contenant le script
 from classe import Recette, Ingredient, Camp, Menu
+
+#fait par nathan
+nbr_personnes = int(input("Combien de personnes vont au camp ? : "))
+camp= Camp(nb_personnes_total = nbr_personnes)
+
+#fait par Hatim
+# ajout tempo recette
+menu = Menu()
+menu.ajout_recette(Recette("Salade",1))
+menu.ajout_recette(Recette("Pizza",1))
+
+
+# affichage recette avec numerotation
+numerotation_recette = 1
+for recette in menu.all_recette:
+    print(f"{numerotation_recette}. {recette.nom_recette}")
+    numerotation_recette += 1
+
+#fait par Louis
+for i in menu.all_recette:
+    i.ajout_ingredient()
+
+chiffre_choisi = int(input("Choisir le numéro d'une recette : ")) - 1
+recette_choisi = menu.all_recette[chiffre_choisi]
+
+cout = menu.cacul_cout(recette_choisi)
+
+cout_tot = cout * camp.nb_personnes_total
+print(cout_tot)
+
+#fait par Antonin
+def calcul_quantite(recette, nombre_personnes): 
+    quantites= {}
+    for ingredient in recette.ingredient:
+        quantite_totale = ingredient.paquets * nombre_personnes
+        quantites[ingredient.nom] = quantite_totale
+    return quantites
+
+print(calcul_quantite(recette_choisi, camp.nb_personnes_total))
