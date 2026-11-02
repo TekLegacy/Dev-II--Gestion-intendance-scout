@@ -8,8 +8,11 @@ camp= Camp(nb_personnes_total = nbr_personnes)
 #fait par Hatim
 # ajout tempo recette
 menu = Menu()
-menu.ajout_recette(Recette("Salade",1))
-menu.ajout_recette(Recette("Pizza",1))
+menu.ajout_recette(Recette("Salade",2))
+menu.ajout_recette(Recette("Pizza",3))
+menu.ajout_recette(Recette("Pate",1))
+menu.ajout_recette(Recette("Boulette",1))
+menu.ajout_recette(Recette("Burger",2))
 
 
 # affichage recette avec numerotation
