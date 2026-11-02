@@ -55,3 +55,38 @@ class Ingredient :
 
     def __str__(self):
         return f"L'ingrédient : {self.nom} coûte {self.prix}, s'achète par paquet de {self.paquets}, est frais : {self.est_frais}"   
+
+
+class Menu:
+    def __init__(self):
+        self.all_recette = []
+
+    def cacul_cout(self,recette):
+        cout = 0
+        for i in recette.ingredient:
+            cout += i.prix
+        return cout
+
+    def contient_frais(self, recette):
+        for i in recette.ingredient:
+            if i.est_frais == True:
+                return True
+            else:
+                return False
+
+    def ajout_recette(self, new_recette):
+        self.all_recette.append(new_recette)
+        return 'La recette a bien été ajouter au menu'
+
+    def supprime_recette(self, old_recette):
+        temporaire = []
+        for i in self.all_recette:
+            if i != old_recette:
+                temporaire.append(i)
+        if len(temporaire) < len(self.all_recette):
+            self.all_recette = temporaire
+            return "La recette a bien ete supprime de la liste"
+        return 'erreur'
+
+    def __str__(self): # en cours
+        return f"Le menu contient {len(self.all_recette)} recettes"
