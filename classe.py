@@ -84,6 +84,23 @@ class Menu:
         return cout
 
     def contient_frais(self, recette):
+        """
+        Il indique si la recette contient au minimum un ingrédient frais
+
+        Input: recette est un objet recette
+        Output: Booléen
+
+        PRE:
+            - recette.ingredient est une liste d'Ingredient
+            - l'attribut est_frais de chaque ingrédiant est un booléen
+
+        POST:
+            - retourne True si un des ingredient contient True à est_frais
+            - retourne False si tout les ingredients contient False à est_frais
+            - retourne False si la recette n'a aucun ingrédient
+            - la recette n'est pas modifiée (car on ne fait pas de modification juste de la lecture)
+
+        """
         for i in recette.ingredient:
             if i.est_frais == True:
                 return True
