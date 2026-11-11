@@ -112,6 +112,22 @@ class Menu:
         return 'La recette a bien été ajouter au menu'
 
     def supprime_recette(self, old_recette):
+        """
+        Supression d'une recette du menu
+
+        Input: old_recette est un objet recette
+        Output: Un message de confirmation est affiche si la supression a réussi
+
+        PRE:
+            - old_recette est un objet Recette
+            - self.all_recette est une liste de recettes
+            - old_recette doit etre unique lors de l'ajout de la recette
+
+        POST:
+            - si dans old_recette est dans self.all_recette alors on deplace tout les recettes sauf la old_recette et on ecrase l'ancien self.all_recette avec la nouvelle en mettant un message de confirmation
+            - si dans old_recette ne se trouve pas dans self.all_recette alors la méthode retourne "erreur"
+        """
+
         temporaire = []
         for i in self.all_recette:
             if i != old_recette:
