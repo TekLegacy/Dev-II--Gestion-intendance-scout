@@ -62,6 +62,22 @@ class Menu:
         self.all_recette = []
 
     def cacul_cout(self,recette):
+        """
+        Cacule le côut total des ingrediants d'une recette
+
+        Input: recette est un objet recette
+        Output: cout est un nombre (float)
+
+        PRE:
+            - recette.ingredient est une liste d'Ingredient
+            - le prix de chaque ingrédiant est un nombre positif
+
+        POST:
+            - returne la somme des prix de tous les ingrédiants
+            - retourne 0 si la recette n'a pas d'ingrédiant (vu que de base mon variable cout commence par 0 )
+            - la recette n'est pas modifiée (car on ne fait pas d'append ni de remove juste on lit l'info et on le prend pour le cacul du côut)
+
+        """
         cout = 0
         for i in recette.ingredient:
             cout += i.prix
