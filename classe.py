@@ -63,19 +63,21 @@ class Menu:
 
     def cacul_cout(self,recette):
         """
-        Cacule le côut total des ingrediants d'une recette
+        Calcule le coût total des ingrédients d'une recette
 
         Input: recette est un objet recette
         Output: cout est un nombre (float)
 
         PRE:
-            - recette.ingredient est une liste d'Ingredient
-            - le prix de chaque ingrédiant est un nombre positif
+            - recette.ingredient est une liste d'Ingrédient
+            - le prix de chaque ingrédient est un nombre positif
 
         POST:
-            - returne la somme des prix de tous les ingrédiants
-            - retourne 0 si la recette n'a pas d'ingrédiant (vu que de base mon variable cout commence par 0 )
-            - la recette n'est pas modifiée (car on ne fait pas d'append ni de remove juste on lit l'info et on le prend pour le cacul du côut)
+            - retourne la somme des prix de tous les ingrédients
+            - retourne 0 si la recette n'a pas d'ingrédient
+                (vu que de base mon variable cout commence par 0 )
+            - la recette n'est pas modifiée
+                (car on ne fait pas d'append ni de remove juste on lit l'info et on le prend pour le calcul du coût)
 
         """
         cout = 0
@@ -91,12 +93,12 @@ class Menu:
         Output: Booléen
 
         PRE:
-            - recette.ingredient est une liste d'Ingredient
-            - l'attribut est_frais de chaque ingrédiant est un booléen
+            - recette.ingredient est une liste d'Ingrédient
+            - l'attribut est_frais de chaque ingrédient est un booléen
 
         POST:
-            - retourne True si un des ingredient contient True à est_frais
-            - retourne False si tout les ingredients contient False à est_frais
+            - retourne True si un des ingrédients contient True à est_frais
+            - retourne False si tous les ingrédients contient False à est_frais
             - retourne False si la recette n'a aucun ingrédient
             - la recette n'est pas modifiée (car on ne fait pas de modification juste de la lecture)
 
@@ -113,19 +115,22 @@ class Menu:
 
     def supprime_recette(self, old_recette):
         """
-        Supression d'une recette du menu
+        Suppression d'une recette du menu
 
         Input: old_recette est un objet recette
-        Output: Un message de confirmation est affiche si la supression a réussi
+        Output: Un message de confirmation est affiche si la suppression a réussi
 
         PRE:
             - old_recette est un objet Recette
             - self.all_recette est une liste de recettes
-            - old_recette doit etre unique lors de l'ajout de la recette
+            - old_recette doit être unique lors de l'ajout de la recette
 
         POST:
-            - si dans old_recette est dans self.all_recette alors on deplace tout les recettes sauf la old_recette et on ecrase l'ancien self.all_recette avec la nouvelle en mettant un message de confirmation
+            - si dans old_recette est dans self.all_recette alors on déplace tous les recettes
+                sauf la old_recette et on écrase l'ancien self.all_recette avec la nouvelle en mettant un message de confirmation
+
             - si dans old_recette ne se trouve pas dans self.all_recette alors la méthode retourne "erreur"
+
         """
 
         temporaire = []
