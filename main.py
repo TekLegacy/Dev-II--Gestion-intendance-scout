@@ -1,6 +1,7 @@
 #fichier contenant le script
 from classe import Recette, Ingredient, Camp, Menu
 
+
 #fait par nathan
 nbr_personnes = int(input("Combien de personnes vont au camp ? : "))
 camp= Camp(nb_personnes_total = nbr_personnes)
