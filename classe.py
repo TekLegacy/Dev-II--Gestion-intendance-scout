@@ -57,6 +57,22 @@ class Recette:
         
 class Ingredient : 
     def __init__(self,nom : str, prix : float, paquets : int, est_frais : bool):
+        ''' 
+        Constructeur de la classe Ingredient. 
+
+        PRE:
+            - nom est une chaîne de caractères représentant le nom de l'ingrédient 
+                Attention: le nom ne peut pas etre une chaine vide
+            - prix est un nombre flottant représentant le prix de l'ingrédient 
+                Attention: le prix doit etre >= 0    
+            - paquets est un entier représentant le nombre de paquets de l'ingrédient 
+                Attention: le nombre de paquets doit etre >= 1
+            - est_frais est un booléen indiquant si l'ingrédient est frais ou non
+
+        Post:
+            - Un object Ingredient est crée avec les quattre attributs valide correspond aux argument nom, prix, paquets et est_frais. 
+        '''
+
         self.nom = nom
         self.prix = prix
         self.paquets = paquets
@@ -70,7 +86,7 @@ class Menu:
     def __init__(self):
         self.all_recette = []
 
-    def cacul_cout(self,recette):
+    def calcul_cout(self,recette):
         """
         Calcule le coût total des ingrédients d'une recette
 
@@ -119,6 +135,16 @@ class Menu:
                 return False
 
     def ajout_recette(self, new_recette):
+        """
+        Ajout d'une recette au menu. 
+
+        PRE:
+            -new_recettte est un objet Recette qui correspond a la recette que l'on veut ajouter. 
+        
+        POST: 
+            -si new_recette existe deja aux menu on retourne 'erreur'.  (EXPTIONS ??? ValueError)
+            -si new_recette n'existe pas aux menu on l'ajoute et on retourne 'La recette a bien été ajouter au menu'   
+        """
         self.all_recette.append(new_recette)
         return 'La recette a bien été ajouter au menu'
 
