@@ -2,6 +2,18 @@
 
 class Camp:
     def __init__(self, nb_jours = 0, nb_personnes_total = 0, budget_jour_personne = 0, nb_pers_tranche = [0, 0, 0]):
+        '''
+        Constructeur de la classe Camp.
+
+        PRE:
+            - nb_jours est un entier représentant le nombre de jours du camp
+            - nb_personnes_total est un entier représentant le nombre total de personnes au camp
+            - budget_jour_personne est un entier représentant le budget par jour et par personne
+            - nb_pers_tranche est une liste de trois entiers représentant le nombre de personnes dans chaque tranche d'âge
+
+        POST:
+            - Un objet Camp est créé avec les attributs nb_jours, nb_personnes_total, budget_jour_personne, nb_pers_tranche et budget
+        ''' 
         self.nb_jours = nb_jours
         self.nb_personnes_total = nb_personnes_total
         self.budget_jour_personne = budget_jour_personne
@@ -9,11 +21,33 @@ class Camp:
         self.budget = self.nb_jours * self.nb_personnes_total * self.budget_jour_personne
     
     def calcule_portion(self):
+
+        '''
+        Calcule la portion de nourriture nécessaire pour le camp en fonction du nombre de personnes dans chaque tranche d'âge.
+
+        PRE:
+            - self.nb_pers_tranche est une liste de trois entiers représentant le nombre de personnes dans chaque tranche d'âge.
+
+        POST:
+            - Retourne un float représentant la portion totale de nourriture nécessaire pour le camp.
+
+        '''
         portion = self.nb_pers_tranche[0] * 0.8 + self.nb_pers_tranche[1] * 1 + self.nb_pers_tranche[2] * 1.1
         return portion
 
     def deduire_cout(self, cout):
+        '''
+        Déduit le coût d'une recette du budget total du camp.
+
+        PRE:
+            - cout est un float représentant le coût d'une recette.
+
+        POST:
+            - Met à jour l'attribut self.budget en soustrayant le coût de la recette.
+        '''
         self.budget -= cout
+
+
 
 
 class Recette:
