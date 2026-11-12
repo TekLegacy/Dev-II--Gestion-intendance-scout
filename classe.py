@@ -1,7 +1,19 @@
 #fichier contenant les classes
 
 class Camp:
-    def __init__(self, nb_jours = 0, nb_personnes_total = 0, budget_jour_personne = 0, nb_pers_tranche = [0, 0, 0]):
+    def __init__(self, nb_jours = 12, nb_personnes_total = 0, budget_jour_personne = 6.5, nb_pers_tranche = [0, 0, 0]):
+        '''
+        Constructeur de la classe Camp.
+
+        PRE:
+            - nb_jours est un entier représentant le nombre de jours du camp
+            - nb_personnes_total est un entier représentant le nombre total de personnes au camp
+            - budget_jour_personne est un entier représentant le budget par jour et par personne
+            - nb_pers_tranche est une liste de trois entiers représentant le nombre de personnes dans chaque tranche d'âge
+
+        POST:
+            - Un objet Camp est créé avec les attributs nb_jours, nb_personnes_total, budget_jour_personne, nb_pers_tranche et budget
+        ''' 
         self.nb_jours = nb_jours
         self.nb_personnes_total = nb_personnes_total
         self.budget_jour_personne = budget_jour_personne
@@ -9,41 +21,91 @@ class Camp:
         self.budget = self.nb_jours * self.nb_personnes_total * self.budget_jour_personne
     
     def calcule_portion(self):
+
+        '''
+        Calcule la portion de nourriture nécessaire pour le camp en fonction du nombre de personnes dans chaque tranche d'âge.
+
+        PRE:
+            - self.nb_pers_tranche est une liste de trois entiers représentant le nombre de personnes dans chaque tranche d'âge.
+
+        POST:
+            - Retourne un float représentant la portion totale de nourriture nécessaire pour le camp.
+
+        '''
         portion = self.nb_pers_tranche[0] * 0.8 + self.nb_pers_tranche[1] * 1 + self.nb_pers_tranche[2] * 1.1
         return portion
 
     def deduire_cout(self, cout):
+        '''
+        Déduit le coût d'une recette du budget total du camp.
+
+        PRE:
+            - cout est un float représentant le coût d'une recette.
+
+        POST:
+            - Met à jour l'attribut self.budget en soustrayant le coût de la recette.
+        '''
         self.budget -= cout
+
+
 
 
 class Recette:
     def __init__(self, nom_recette : str, nbr_ingredients : int):
+        ''' 
+        Constructeur de la classe Recette. 
+
+        PRE:
+            - nom_recette est un string non nul représentant le nom d'une recette
+            - nbr_ingrédients est un integer plus grand que 0 représentant le nombre d'ingrédient différent dans la recette
+
+        Post:
+            - Un object Recette est crée avec les 2 attributs valide correspand aux arguments nom_recette et nbr_ingrédients 
+            ainsi qu'une liste "ingrédients" initialisé à vide. 
+        '''
         self.nom_recette = nom_recette
         self.nbr_ingredients = nbr_ingredients
 
         self.ingredient = []
 
-    def ajout_ingredient(self):
-        if len(self.ingredient) == 0:
-            for i in range(self.nbr_ingredients):
-                nom = str(input("le nom de l'ingédient ? : "))
-                prix = float(input("son prix ? : "))
-                paquet = int(input("quelle est sa taille ? : "))
-                est_frais = bool(input("est-il frais ? (True ou False) : "))
+    def ajout_ingredient(self, nom, prix, paquet, est_frais):
+        """
+        Crée un nouvelle objet ingrédient et l'ajoute à la liste ingrédients
 
-                ing = Ingredient(nom, prix, paquet, est_frais)
-                self.ingredient.append(ing)
+        PRE:
+            - nom est un string non nul
+            - prix est un float plus grand que 0
+            - paquet est un integer plus grand que 0
+            - est_frais est un booléen
+
+        POST:
+            - ne retourne rien
+            - si la liste Ingrédients fait le taille de nbr_ingredients, 
+            rajoute le nouvel ingrédient à la liste et augmente nbr_ingrédients de 1
+            - si la taille de la liste ingrédients est plus petite que nbr_ingrédients, 
+            rajoute le nouvel ingrédient à la liste
+        """
+        ing = Ingredient(nom, prix, paquet, est_frais)
+        if len(self.ingredient) < self.nbr_ingredients:
+            self.ingredient.append(ing)
         else:
-            nom = str(input("le nom de l'ingédient ? : "))
-            prix = float(input("son prix ? : "))
-            paquet = int(input("quelle est sa taille ? : "))
-            est_frais = bool(input("est-il frais ? (True ou False) : "))
-            ing = Ingredient(nom, prix, paquet, est_frais)
             self.ingredient.append(ing)
             self.nbr_ingredients += 1
-
+        
 
     def supprimer_ingredient(self, ingre):
+        """
+        Supprime l'ingrédient avec le nom "ingre" de la liste ingrédients
+
+        PRE:
+            - ingre est un string non nul
+            - la liste ingrédients ne peut pas être vide
+
+        POST:
+            - ne retourne rien
+            - supprime l'ingrédient de la liste
+            - si l'ingrédient n'est pas dans la liste, ne fait rien
+        """
         temp_l = []
         for i in self.ingredient:
             if i.nom != ingre:
