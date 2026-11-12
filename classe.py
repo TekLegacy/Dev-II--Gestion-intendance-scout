@@ -212,6 +212,7 @@ class Menu:
 
     def ajout_recette(self, new_recette):
         """
+        (Antonin)
         Ajout d'une recette au menu. 
 
         PRE:
