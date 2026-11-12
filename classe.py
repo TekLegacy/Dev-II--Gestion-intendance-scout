@@ -1,14 +1,14 @@
 #fichier contenant les classes
 
 class Camp:
-    def __init__(self, nb_jours = 12, nb_personnes_total = 0, budget_jour_personne = 6.5, nb_pers_tranche = [0, 0, 0]):
+    def __init__(self, nb_jours :int = 12, nb_personnes_total :int = 0, budget_jour_personne :float = 6.5, nb_pers_tranche :list = [0, 0, 0]):
         '''
         Constructeur de la classe Camp.
 
         PRE:
             - nb_jours est un entier représentant le nombre de jours du camp
             - nb_personnes_total est un entier représentant le nombre total de personnes au camp
-            - budget_jour_personne est un entier représentant le budget par jour et par personne
+            - budget_jour_personne est un float représentant le budget par jour et par personne
             - nb_pers_tranche est une liste de trois entiers représentant le nombre de personnes dans chaque tranche d'âge
 
         POST:
@@ -44,7 +44,11 @@ class Camp:
 
         POST:
             - Met à jour l'attribut self.budget en soustrayant le coût de la recette.
+            - Le budget ne peut pas devenir négatif. Si le coût est supérieur au budget, une exception est levée.
         '''
+        if cout > self.budget:
+            raise ValueError("Le coût dépasse le budget disponible.")
+
         self.budget -= cout
 
 
