@@ -1,7 +1,7 @@
 #fichier contenant les classes
 
 class Camp:
-    def __init__(self, nb_jours = 0, nb_personnes_total = 0, budget_jour_personne = 0, nb_pers_tranche = [0, 0, 0]):
+    def __init__(self, nb_jours = 12, nb_personnes_total = 0, budget_jour_personne = 6.5, nb_pers_tranche = [0, 0, 0]):
         '''
         Constructeur de la classe Camp.
 
