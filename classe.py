@@ -18,32 +18,59 @@ class Camp:
 
 class Recette:
     def __init__(self, nom_recette : str, nbr_ingredients : int):
+        ''' 
+        Constructeur de la classe Recette. 
+
+        PRE:
+            - nom_recette est un string non nul représentant le nom d'une recette
+            - nbr_ingrédients est un integer plus grand que 0 représentant le nombre d'ingrédient différent dans la recette
+
+        Post:
+            - Un object Recette est crée avec les 2 attributs valide correspand aux arguments nom_recette et nbr_ingrédients. 
+        '''
         self.nom_recette = nom_recette
         self.nbr_ingredients = nbr_ingredients
 
         self.ingredient = []
 
-    def ajout_ingredient(self):
-        if len(self.ingredient) == 0:
-            for i in range(self.nbr_ingredients):
-                nom = str(input("le nom de l'ingédient ? : "))
-                prix = float(input("son prix ? : "))
-                paquet = int(input("quelle est sa taille ? : "))
-                est_frais = bool(input("est-il frais ? (True ou False) : "))
+    def ajout_ingredient(self, nom, prix, paquet, est_frais):
+        """
+        Crée un nouvelle objet ingrédient et l'ajoute à la liste ingrédients
 
-                ing = Ingredient(nom, prix, paquet, est_frais)
-                self.ingredient.append(ing)
+        PRE:
+            - nom est un string non nul
+            - prix est un float plus grand que 0
+            - paquet est un integer plus grand que 0
+            - est_frais est un booléen
+
+        POST:
+            - ne retourne rien
+            - si la liste Ingrédients fait le taille de nbr_ingredients, 
+            rajoute le nouvel ingrédient à la liste et augmente nbr_ingrédients de 1
+            - si la taille de la liste ingrédients est plus petite que nbr_ingrédients, 
+            rajoute le nouvel ingrédient à la liste
+        """
+        ing = Ingredient(nom, prix, paquet, est_frais)
+        if len(self.ingredient) < self.nbr_ingredients:
+            self.ingredient.append(ing)
         else:
-            nom = str(input("le nom de l'ingédient ? : "))
-            prix = float(input("son prix ? : "))
-            paquet = int(input("quelle est sa taille ? : "))
-            est_frais = bool(input("est-il frais ? (True ou False) : "))
-            ing = Ingredient(nom, prix, paquet, est_frais)
             self.ingredient.append(ing)
             self.nbr_ingredients += 1
-
+        
 
     def supprimer_ingredient(self, ingre):
+        """
+        Supprime l'ingrédient avec le nom "ingre" de la liste ingrédients
+
+        PRE:
+            - ingre est un string non nul
+            - la liste ingrédients ne peut pas être vide
+
+        POST:
+            - ne retourne rien
+            - supprime l'ingrédient de la liste
+            - si l'ingrédient n'est pas dans la liste, ne fait rien
+        """
         temp_l = []
         for i in self.ingredient:
             if i.nom != ingre:
