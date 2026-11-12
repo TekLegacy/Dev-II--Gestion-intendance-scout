@@ -34,7 +34,7 @@ cout_tot = cout * camp.nb_personnes_total
 print(cout_tot)
 
 #fait par Antonin
-def calcul_quantite(recette, nombre_personnes): 
+def calcul_quantite(recette, nombre_personnes) -> dict: 
     '''
     Calcul la quantite total d'ingredient pour une recette choisie. 
     
@@ -42,9 +42,11 @@ def calcul_quantite(recette, nombre_personnes):
         -recette est une objet RECETTE correspond a la recette choisie. 
         -nombre_personne est un entier provenant de la classe CAMP correspond au nombre total de personne presente au camp.  
     POST:
-        -retourne un dictionnaire contenant chaque nom d'ingredient present dans la recette et la quantite a acheter pour la recette choisie.
-    
+        -retourne un dictionnaire contenant chaque nom d'ingredient present dans la recette et la quantite a acheter pour la recette choisie en fonction du nombre de personnes presentes.
+        -si nombre de personne est 0, retourne un message d'erreur disant que personne n'est present au camp.
     '''
+    if nombre_personnes == 0:
+        return "Aucune personne n'est présente au camp."
     quantites= {}
     for ingredient in recette.ingredient:
         quantite_totale = ingredient.paquets * nombre_personnes
