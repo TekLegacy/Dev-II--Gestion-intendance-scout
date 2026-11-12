@@ -14,27 +14,29 @@ class Camp:
         POST:
             - Un objet Camp est créé avec les attributs nb_jours, nb_personnes_total, budget_jour_personne, nb_pers_tranche et budget
         ''' 
-        self.nb_jours = nb_jours
-        self.nb_personnes_total = nb_personnes_total
-        self.budget_jour_personne = budget_jour_personne
-        self.nb_pers_tranche = nb_pers_tranche
-        self.budget = self.nb_jours * self.nb_personnes_total * self.budget_jour_personne
-    
+        self.__nb_jours = nb_jours
+        self.__nb_personnes_total = nb_personnes_total
+        self.__budget_jour_personne = budget_jour_personne
+        self.__nb_pers_tranche = nb_pers_tranche
+        self.__budget = self.__nb_jours * self.__nb_personnes_total * self.__budget_jour_personne
+
+    @property
     def calcule_portion(self):
 
         '''
         Calcule la portion de nourriture nécessaire pour le camp en fonction du nombre de personnes dans chaque tranche d'âge.
 
         PRE:
-            - self.nb_pers_tranche est une liste de trois entiers représentant le nombre de personnes dans chaque tranche d'âge.
+            - self.__nb_pers_tranche est une liste de trois entiers représentant le nombre de personnes dans chaque tranche d'âge.
 
         POST:
             - Retourne un float représentant la portion totale de nourriture nécessaire pour le camp.
 
         '''
-        portion = self.nb_pers_tranche[0] * 0.8 + self.nb_pers_tranche[1] * 1 + self.nb_pers_tranche[2] * 1.1
+        portion = self.__nb_pers_tranche[0] * 0.8 + self.__nb_pers_tranche[1] * 1 + self.__nb_pers_tranche[2] * 1.1
         return portion
 
+    @__budget.setter
     def deduire_cout(self, cout):
         '''
         Déduit le coût d'une recette du budget total du camp.
@@ -44,7 +46,8 @@ class Camp:
             - le budget doit être aussi plus grand que cout
 
         POST:
-            - Met à jour l'attribut self.budget en soustrayant le coût de la recette.
+            - Met à jour l'attribut self.__budget en soustrayant le coût de la recette.
+            - Le budget ne peut pas devenir négatif. Si le coût est supérieur au budget, une exception est levée.
         '''
         if self.budget >= cout:
             self.budget -= cout
