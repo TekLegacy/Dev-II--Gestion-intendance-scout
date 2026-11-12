@@ -26,7 +26,8 @@ class Recette:
             - nbr_ingrédients est un integer plus grand que 0 représentant le nombre d'ingrédient différent dans la recette
 
         Post:
-            - Un object Recette est crée avec les 2 attributs valide correspand aux arguments nom_recette et nbr_ingrédients. 
+            - Un object Recette est crée avec les 2 attributs valide correspand aux arguments nom_recette et nbr_ingrédients 
+            ainsi qu'une liste "ingrédients" initialisé à vide. 
         '''
         self.nom_recette = nom_recette
         self.nbr_ingredients = nbr_ingredients
