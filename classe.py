@@ -57,6 +57,22 @@ class Recette:
         
 class Ingredient : 
     def __init__(self,nom : str, prix : float, paquets : int, est_frais : bool):
+        ''' 
+        Constructeur de la classe Ingredient. 
+
+        PRE:
+            - nom est une chaîne de caractères représentant le nom de l'ingrédient 
+                Attention: le nom ne peut pas etre une chaine vide
+            - prix est un nombre flottant représentant le prix de l'ingrédient 
+                Attention: le prix doit etre >= 0    
+            - paquets est un entier représentant le nombre de paquets de l'ingrédient 
+                Attention: le nombre de paquets doit etre >= 1
+            - est_frais est un booléen indiquant si l'ingrédient est frais ou non
+
+        Post:
+            - Un object Ingredient est crée avec les quattre attributs valide correspond aux argument nom, prix, paquets et est_frais. 
+        '''
+
         self.nom = nom
         self.prix = prix
         self.paquets = paquets
@@ -70,13 +86,48 @@ class Menu:
     def __init__(self):
         self.all_recette = []
 
-    def cacul_cout(self,recette):
+    def calcul_cout(self,recette):
+        """
+        Calcule le coût total des ingrédients d'une recette
+
+        Input: recette est un objet recette
+        Output: cout est un nombre (float)
+
+        PRE:
+            - recette.ingredient est une liste d'Ingrédient
+            - le prix de chaque ingrédient est un nombre positif
+
+        POST:
+            - retourne la somme des prix de tous les ingrédients
+            - retourne 0 si la recette n'a pas d'ingrédient
+                (vu que de base mon variable cout commence par 0 )
+            - la recette n'est pas modifiée
+                (car on ne fait pas d'append ni de remove juste on lit l'info et on le prend pour le calcul du coût)
+
+        """
         cout = 0
         for i in recette.ingredient:
             cout += i.prix
         return cout
 
     def contient_frais(self, recette):
+        """
+        Il indique si la recette contient au minimum un ingrédient frais
+
+        Input: recette est un objet recette
+        Output: Booléen
+
+        PRE:
+            - recette.ingredient est une liste d'Ingrédient
+            - l'attribut est_frais de chaque ingrédient est un booléen
+
+        POST:
+            - retourne True si un des ingrédients contient True à est_frais
+            - retourne False si tous les ingrédients contient False à est_frais
+            - retourne False si la recette n'a aucun ingrédient
+            - la recette n'est pas modifiée (car on ne fait pas de modification juste de la lecture)
+
+        """
         for i in recette.ingredient:
             if i.est_frais == True:
                 return True
@@ -84,10 +135,39 @@ class Menu:
                 return False
 
     def ajout_recette(self, new_recette):
+        """
+        Ajout d'une recette au menu. 
+
+        PRE:
+            -new_recettte est un objet Recette qui correspond a la recette que l'on veut ajouter. 
+        
+        POST: 
+            -si new_recette existe deja aux menu on retourne 'erreur'.  (EXPTIONS ??? ValueError)
+            -si new_recette n'existe pas aux menu on l'ajoute et on retourne 'La recette a bien été ajouter au menu'   
+        """
         self.all_recette.append(new_recette)
         return 'La recette a bien été ajouter au menu'
 
     def supprime_recette(self, old_recette):
+        """
+        Suppression d'une recette du menu
+
+        Input: old_recette est un objet recette
+        Output: Un message de confirmation est affiche si la suppression a réussi
+
+        PRE:
+            - old_recette est un objet Recette
+            - self.all_recette est une liste de recettes
+            - old_recette doit être unique lors de l'ajout de la recette
+
+        POST:
+            - si dans old_recette est dans self.all_recette alors on déplace tous les recettes
+                sauf la old_recette et on écrase l'ancien self.all_recette avec la nouvelle en mettant un message de confirmation
+
+            - si dans old_recette ne se trouve pas dans self.all_recette alors la méthode retourne "erreur"
+
+        """
+
         temporaire = []
         for i in self.all_recette:
             if i != old_recette:

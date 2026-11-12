@@ -28,13 +28,23 @@ for i in menu.all_recette:
 chiffre_choisi = int(input("Choisir le numéro d'une recette : ")) - 1
 recette_choisi = menu.all_recette[chiffre_choisi]
 
-cout = menu.cacul_cout(recette_choisi)
+cout = menu.calcul_cout(recette_choisi)
 
 cout_tot = cout * camp.nb_personnes_total
 print(cout_tot)
 
 #fait par Antonin
 def calcul_quantite(recette, nombre_personnes): 
+    '''
+    Calcul la quantite total d'ingredient pour une recette choisie. 
+    
+    PRE:
+        -recette est une objet RECETTE correspond a la recette choisie. 
+        -nombre_personne est un entier provenant de la classe CAMP correspond au nombre total de personne presente au camp. (PAS SUR DE ENTIER DE CAMP OU OBJECT ??) 
+    POST:
+        -retourne un dictionnaire contenant chaque nom d'ingredient present dans la recette et la quantite a acheter pour la recette choisie.
+    
+    '''
     quantites= {}
     for ingredient in recette.ingredient:
         quantite_totale = ingredient.paquets * nombre_personnes
