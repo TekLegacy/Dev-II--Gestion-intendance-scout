@@ -40,7 +40,7 @@ def calcul_quantite(recette, nombre_personnes):
     
     PRE:
         -recette est une objet RECETTE correspond a la recette choisie. 
-        -nombre_personne est un entier provenant de la classe CAMP correspond au nombre total de personne presente au camp. (PAS SUR DE ENTIER DE CAMP OU OBJECT ??) 
+        -nombre_personne est un entier provenant de la classe CAMP correspond au nombre total de personne presente au camp.  
     POST:
         -retourne un dictionnaire contenant chaque nom d'ingredient present dans la recette et la quantite a acheter pour la recette choisie.
     
