@@ -154,8 +154,8 @@ class Ingredient :
             raise ValueError("Le prix de l'ingrédient doit être un nombre plus grand que 0.")
         else : 
             self.prix = prix
-        if paquets <= 1:
-            raise ValueError("Le nombre de paquets de l'ingrédient doit être un entier plus grand ou égal à 1.")
+        if paquets < 1:
+            raise ValueError("Le nombre de paquets de l'ingrédient doit être un entier plus grand que 1.")
         else :
             self.paquets = paquets
         self.est_frais = est_frais
