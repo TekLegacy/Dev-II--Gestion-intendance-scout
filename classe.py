@@ -35,8 +35,13 @@ class Camp:
         '''
         portion = self.__nb_pers_tranche[0] * 0.8 + self.__nb_pers_tranche[1] * 1 + self.__nb_pers_tranche[2] * 1.1
         return portion
+    
+    @property
+    def budget(self) -> float:
+        """Getter pour accéder au budget du camp."""
+        return self.__budget 
 
-    @__budget.setter
+    @budget.setter
     def deduire_cout(self, cout):
         '''
         Déduit le coût d'une recette du budget total du camp.
