@@ -235,6 +235,8 @@ class Menu:
             -si new_recette existe deja aux menu on retourne 'erreur'.  (EXCEPTION ValueError)
             -si new_recette n'existe pas au menu on l'ajoute et on retourne 'La recette a bien été ajouté au menu'   
         """
+        if new_recette in self.all_recette:
+            raise ValueError("La recette existe déjà dans le menu.")
         self.all_recette.append(new_recette)
         return 'La recette a bien été ajouté au menu'
  
