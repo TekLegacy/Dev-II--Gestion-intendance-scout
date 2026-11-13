@@ -39,7 +39,7 @@ class Camp:
     @property
     def budget(self) -> float:
         """Getter pour accéder au budget du camp."""
-        return self.__budget
+        return self.__budget 
 
     @budget.setter
     def deduire_cout(self, cout):
