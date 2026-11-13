@@ -125,7 +125,7 @@ class Recette:
 
         
 class Ingredient : 
-    def __init__(self,nom : str, prix : float, paquets : int, est_frais : bool):
+    def __init__(self,nom : str, prix : float, paquets : int, est_frais : bool) -> None:
         ''' 
         Constructeur de la classe Ingredient. 
 
@@ -133,7 +133,7 @@ class Ingredient :
             - nom est une chaîne de caractères représentant le nom de l'ingrédient 
                 Attention: le nom ne peut pas etre une chaine vide
             - prix est un nombre flottant représentant le prix de l'ingrédient 
-                Attention: le prix doit etre plus grand ou egal a 0     
+                Attention: le prix doit etre plus grand que 0     
             - paquets est un entier représentant le nombre de paquets de l'ingrédient 
                 Attention: le nombre de paquets doit etre plus grand ou egal a 1 
             - est_frais est un booléen indiquant si l'ingrédient est frais ou non
@@ -141,10 +141,18 @@ class Ingredient :
         Post:
             - Un object Ingredient est crée avec les quattre attributs valide correspond aux argument nom, prix, paquets et est_frais. 
         '''
-
-        self.nom = nom
-        self.prix = prix
-        self.paquets = paquets
+        if not nom:
+            raise ValueError("Le nom de l'ingrédient ne peut pas être vide.")
+        else : 
+            self.nom = nom
+        if prix <= 0:
+            raise ValueError("Le prix de l'ingrédient doit être un nombre plus grand que 0.")
+        else : 
+            self.prix = prix
+        if paquets <= 1:
+            raise ValueError("Le nombre de paquets de l'ingrédient doit être un entier plus grand ou égal à 1.")
+        else :
+            self.paquets = paquets
         self.est_frais = est_frais
 
     def __str__(self):
@@ -210,7 +218,7 @@ class Menu:
             
         return False
 
-    def ajout_recette(self, new_recette):
+    def ajout_recette(self, new_recette) -> str:
         """
         (Antonin)
         Ajout d'une recette au menu. 
@@ -224,7 +232,7 @@ class Menu:
         """
         self.all_recette.append(new_recette)
         return 'La recette a bien été ajouté au menu'
-
+ 
     def supprime_recette(self, old_recette):
         """
         Suppression d'une recette du menu
