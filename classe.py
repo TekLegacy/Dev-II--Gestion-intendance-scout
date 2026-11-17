@@ -240,9 +240,12 @@ class Menu:
 
         """
         cout = 0
-        for i in recette.ingredient:
-            cout += i.prix
-        return cout
+        if len(recette.ingredient) == 0:
+            return cout
+        else : 
+            for i in recette.ingredient:
+                cout += i.prix
+            return cout
 
     def contient_frais(self, recette):
         """
