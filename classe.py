@@ -38,8 +38,24 @@ class Camp:
     
     @property
     def budget(self) -> float:
-        """Getter pour accéder au budget du camp."""
         return self.__budget 
+
+    @property
+    def personne_total(self) -> int:
+        return self.__nb_personnes_total
+    
+    @property
+    def nb_jours(self) -> int:
+        return self.__nb_jours
+
+    @property
+    def budget_jour_personne(self) -> float:
+        return self.__budget_jour_personne
+    
+    @property
+    def nb_pers_tranche(self) -> list:
+        return self.__nb_pers_tranche
+    
 
     @budget.setter
     def deduire_cout(self, cout):
