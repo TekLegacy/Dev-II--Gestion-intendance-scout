@@ -162,19 +162,48 @@ class Ingredient :
         Post:
             - Un object Ingredient est crée avec les quattre attributs valide correspond aux argument nom, prix, paquets et est_frais. 
         '''
-        if not nom:
-            raise ValueError("Le nom de l'ingrédient ne peut pas être vide.")
-        else : 
-            self.nom = nom
-        if prix <= 0:
-            raise ValueError("Le prix de l'ingrédient doit être un nombre plus grand que 0.")
-        else : 
-            self.prix = prix
-        if paquets < 1:
-            raise ValueError("Le nombre de paquets de l'ingrédient doit être un entier plus grand que 1.")
-        else :
-            self.paquets = paquets
-        self.est_frais = est_frais
+        self.__nom = nom
+        self.__prix = prix
+        self.__paquets = paquets
+        self.__est_frais = est_frais
+
+        @property
+        def nom(self) -> str:
+            return self.__nom
+
+        @property
+        def prix(self) -> float:
+            return self.__prix
+        
+        @property
+        def paquets(self) -> int:
+            return self.__paquets
+
+        @property
+        def est_frais(self) -> bool:
+            return self.__est_frais
+
+        @nom.setter
+        def nom(self, nom : str) -> None:
+            if not nom:
+                raise ValueError("Le nom de l'ingrédient ne peut pas être vide.")
+            self.__nom = nom
+
+        @prix.setter
+        def prix(self, prix : float) -> None:
+            if prix <= 0:
+                raise ValueError("Le prix de l'ingrédient doit être supérieur à 0.")
+            self.__prix = prix
+
+        @paquets.setter
+        def paquets(self, paquets : int) -> None:
+          if paquets < 1:
+              raise ValueError("Le nombre de paquets doit être supérieur ou égal à 1.")
+          self.__paquets = paquets  
+
+        @est_frais.setter
+        def est_frais(self, est_frais : bool) -> None: 
+            self.__est_frais = est_frais
 
     def __str__(self):
         return f"L'ingrédient : {self.nom} coûte {self.prix}, s'achète par paquet de {self.paquets}, est frais : {self.est_frais}"   
