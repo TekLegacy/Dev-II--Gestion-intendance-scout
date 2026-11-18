@@ -192,43 +192,43 @@ class Ingredient :
         self.__paquets = paquets
         self.__est_frais = est_frais
 
-        @property
-        def nom(self) -> str:
-            return self.__nom
+    @property
+    def nom(self) -> str:
+        return self.__nom
 
-        @property
-        def prix(self) -> float:
-            return self.__prix
+    @property
+    def prix(self) -> float:
+        return self.__prix
         
-        @property
-        def paquets(self) -> int:
-            return self.__paquets
+    @property
+    def paquets(self) -> int:
+        return self.__paquets
 
-        @property
-        def est_frais(self) -> bool:
-            return self.__est_frais
+    @property
+    def est_frais(self) -> bool:
+        return self.__est_frais
 
-        @nom.setter
-        def nom(self, nom : str) -> None:
-            if not nom:
-                raise ValueError("Le nom de l'ingrédient ne peut pas être vide.")
-            self.__nom = nom
+    @nom.setter
+    def nom(self, nom : str) -> None:
+        if not nom:
+            raise ValueError("Le nom de l'ingrédient ne peut pas être vide.")
+        self.__nom = nom
 
-        @prix.setter
-        def prix(self, prix : float) -> None:
-            if prix <= 0:
-                raise ValueError("Le prix de l'ingrédient doit être supérieur à 0.")
-            self.__prix = prix
+    @prix.setter
+    def prix(self, prix : float) -> None:
+        if prix <= 0:
+            raise ValueError("Le prix de l'ingrédient doit être supérieur à 0.")
+        self.__prix = prix
 
-        @paquets.setter
-        def paquets(self, paquets : int) -> None:
-          if paquets < 1:
-              raise ValueError("Le nombre de paquets doit être supérieur ou égal à 1.")
-          self.__paquets = paquets  
+    @paquets.setter
+    def paquets(self, paquets : int) -> None:
+        if paquets < 1:
+            raise ValueError("Le nombre de paquets doit être supérieur ou égal à 1.")
+        self.__paquets = paquets  
 
-        @est_frais.setter
-        def est_frais(self, est_frais : bool) -> None: 
-            self.__est_frais = est_frais
+    @est_frais.setter
+    def est_frais(self, est_frais : bool) -> None: 
+        self.__est_frais = est_frais
 
     def __str__(self):
         return f"L'ingrédient : {self.nom} coûte {self.prix}, s'achète par paquet de {self.paquets}, est frais : {self.est_frais}"   
