@@ -1,0 +1,67 @@
+{
+    "recette":{
+
+        "Salade de Poulet": [
+            2,{"nom": "Poulet", "prix": 5.0, "paquets": 1, "est_frais": "True"},
+            {"nom": "Salade", "prix": 2.0, "paquets": 2, "est_frais": "True"}    
+        ], 
+        
+        "Pates à la Carbonara": [
+            3,{"nom": "Pates", "prix": 2.0, "paquets": 2, "est_frais": "False"},
+            {"nom": "Lardons", "prix": 6.0, "paquets": 1, "est_frais": "True"}, 
+            {"nom": "Crème", "prix": 1.5, "paquets": 1, "est_frais": "True"}   
+
+        ], 
+
+        "Pates à la Bolognaise": [
+            2,{"nom": "Pates", "prix": 2.0, "paquets": 2, "est_frais": "False"},
+            {"nom": "Sauce Bolognaise", "prix": 10.0, "paquets": 2, "est_frais": "True"} 
+        ],
+
+        "Boulette sauce tomate": [
+            2,{"nom": "Boulettes", "prix": 4.5, "paquets": 2, "est_frais": "True"},
+            {"nom": "Sauce Tomate", "prix": 5.5, "paquets": 1, "est_frais": "True"} 
+        ],
+
+        "Burger": [
+            6,{"nom": "Steak Haché", "prix": 3.5, "paquets": 1, "est_frais": "True"},
+            {"nom": "Pain", "prix": 1, "paquets": 1, "est_frais": "False"},
+            {"nom": "Salade", "prix": 2.0, "paquets": 2, "est_frais": "True"},
+            {"nom": "Tomate", "prix": 1.5, "paquets": 1, "est_frais": "True"},
+            {"nom": "Fromage", "prix": 2.0, "paquets": 1, "est_frais": "True"},
+            {"nom": "Cornichons", "prix": 1.5, "paquets": 1, "est_frais": "True"}
+        ],
+        
+        "Pizza Margarita": [
+            4,{"nom": "Pâte à Pizza", "prix": 2.0, "paquets": 1, "est_frais": "False"},
+            {"nom": "Sauce Tomate", "prix": 5.5, "paquets": 1, "est_frais": "True"},
+            {"nom": "Fromage", "prix": 2.0, "paquets": 1, "est_frais": "True"},
+            {"nom": "Jambon", "prix": 3.0, "paquets": 1, "est_frais": "True"}
+
+        ],
+
+        "Pain saucisse" : [
+            2,{"nom": "Pain", "prix": 1, "paquets": 1, "est_frais": "False"},
+            {"nom": "Saucisse", "prix": 2.5, "paquets": 1, "est_frais": "True"}
+        ],
+
+        "Saucisse purée compote" : [
+            3,{"nom": "Saucisse", "prix": 2.5, "paquets": 1, "est_frais": "True"},
+            {"nom": "Purée", "prix": 1.5, "paquets": 1, "est_frais": "False"},
+            {"nom": "Compote", "prix": 2.0, "paquets": 1, "est_frais": "True"}
+        ],
+
+        "Hachis Parmentier" : [
+            3,{"nom": "Pommes de Terre", "prix": 1.0, "paquets": 1, "est_frais": "True"},
+            {"nom": "Viande Hachée", "prix": 5.0, "paquets": 1, "est_frais": "True"},
+            {"nom": "Epinard", "prix": 2.0, "paquets": 1, "est_frais": "True"}
+
+        ],
+
+        "Tarte aux pommes" : [
+            3,{"nom": "Pâte à tarte", "prix": 2.0, "paquets": 1, "est_frais": "False"},
+            {"nom": "Pommes", "prix": 1.5, "paquets": 1, "est_frais": "True"},
+            {"nom": "Sucre", "prix": 1.0, "paquets": 1, "est_frais": "False"}
+        ]
+    }
+}
