@@ -91,10 +91,22 @@ class Recette:
             - Un object Recette est crée avec les 2 attributs valide correspondant aux arguments nom_recette et nbr_ingrédients 
             ainsi qu'une liste "ingrédient" initialisé à vide. 
         '''
-        self.nom_recette = nom_recette
-        self.nbr_ingredients = nbr_ingredients
+        self.__nom_recette = nom_recette
+        self.__nbr_ingredients = nbr_ingredients
 
-        self.ingredient = []
+        self.__ingredient = []
+
+    @property
+    def nom_recette(self):
+        return self.__nom_recette
+
+    @property
+    def nbr_ingredients(self):
+        return self.__nbr_ingredients
+
+    @property
+    def ingredient(self):
+        return self.__ingredient
 
     def ajout_ingredient(self, nom, prix, paquet, est_frais):
         """
@@ -107,18 +119,23 @@ class Recette:
             - est_frais est un booléen
 
         POST:
-            - ne retourne rien
+            - retourne un string validant l'ajout de l'ingrédient ou non
             - si la liste Ingrédient fait le taille de nbr_ingredients, 
             rajoute le nouvel ingrédient à la liste et augmente nbr_ingrédients de 1
             - si la taille de la liste ingrédient est plus petite que nbr_ingrédients, 
             rajoute le nouvel ingrédient à la liste
         """
+        for i in self.__ingredient:
+            if i.nom == nom:
+                return f"L'ingrédient {nom} est déjà dans le recette"
         ing = Ingredient(nom, prix, paquet, est_frais)
-        if len(self.ingredient) < self.nbr_ingredients:
-            self.ingredient.append(ing)
+        if len(self.__ingredient) < self.__nbr_ingredients:
+            self.__ingredient.append(ing)
+            return f"L'ingrédient {nom} à bien été ajouté à la recette"
         else:
-            self.ingredient.append(ing)
-            self.nbr_ingredients += 1
+            self.__ingredient.append(ing)
+            self.__nbr_ingredients += 1
+            return f"L'ingrédient {nom} à bien été ajouté à la recette"
         
 
     def supprimer_ingredient(self, ingre):
@@ -130,19 +147,27 @@ class Recette:
             - la liste ingrédient ne peut pas être vide
 
         POST:
-            - ne retourne rien
+            - retourne un string confirmant ou non la suppression de l'ingrédient de la recette
             - supprime l'ingrédient de la liste
             - si l'ingrédient n'est pas dans la liste, ne fait rien
         """
+        found = False
+        for i in self.__ingredient:
+            if i.nom == ingre:
+                found = True
+        if not found:
+            return f"L'ingrédient {ingre} n'est pas dans la recette"
+
         temp_l = []
-        for i in self.ingredient:
+        for i in self.__ingredient:
             if i.nom != ingre:
                 temp_l.append(i)
-        self.ingredient = temp_l
-        self.nbr_ingredients = len(temp_l)
+        self.__ingredient = temp_l
+        self.__nbr_ingredients = len(temp_l)
+        return f"L'ingrédient {ingre} à bien été supprimé de la recette"
 
     def __str__(self):
-        return f"La recette {self.nom_recette} contient {self.nbr_ingredients} ingrédients."
+        return f"La recette {self.__nom_recette} contient {self.__nbr_ingredients} ingrédients."
 
         
 class Ingredient : 
