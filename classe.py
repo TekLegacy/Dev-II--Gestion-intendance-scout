@@ -20,7 +20,7 @@ class Camp:
         self.__nb_pers_tranche = nb_pers_tranche
         self.__budget = self.__nb_jours * self.__nb_personnes_total * self.__budget_jour_personne
 
-    @property
+
     def calcule_portion(self):
 
         '''
