@@ -1,29 +1,32 @@
 #fichier contenant le script
 from classe import Recette, Ingredient, Camp, Menu
+import json
 
 #fait par nathan
 nbr_personnes = int(input("Combien de personnes vont au camp ? : "))
+if nbr_personnes <= 0:
+    raise ValueError("Aucune personne n'est présente au camp.")
 camp= Camp(nb_personnes_total = nbr_personnes)
 
 #fait par Hatim
 # ajout tempo recette
 menu = Menu()
-menu.ajout_recette(Recette("Salade",2))
-menu.ajout_recette(Recette("Pizza",3))
-menu.ajout_recette(Recette("Pate",1))
-menu.ajout_recette(Recette("Boulette",1))
-menu.ajout_recette(Recette("Burger",2))
 
+fichier = open("recette.json", "r")
+donnees = json.load(fichier)
+recettes = donnees.get("recette", [])
 
-# affichage recette avec numerotation
-numerotation_recette = 1
-for recette in menu.all_recette:
-    print(f"{numerotation_recette}. {recette.nom_recette}")
-    numerotation_recette += 1
+compteur = 0
+for i in recettes : 
+    menu.ajout_recette(i, recettes[i][0])
+    for j in recettes[i][1:]:
+        menu.all_recette[compteur].ajout_ingredient(j["nom"], j["prix"], j["paquets"], j["est_frais"])
+    compteur += 1    
 
-#fait par Louis
-for i in menu.all_recette:
-    i.ajout_ingredient()
+compteur_recette_numero = 1
+for i in menu.all_recette :
+    print(compteur_recette_numero , i.nom_recette)
+    compteur_recette_numero += 1
 
 chiffre_choisi = int(input("Choisir le numéro d'une recette : ")) - 1
 recette_choisi = menu.all_recette[chiffre_choisi]
@@ -33,24 +36,5 @@ cout = menu.calcul_cout(recette_choisi)
 cout_tot = cout * camp.nb_personnes_total
 print(cout_tot)
 
-#fait par Antonin
-def calcul_quantite(recette, nombre_personnes) -> dict: 
-    '''
-    Calcul la quantite total d'ingredient pour une recette choisie. 
-    
-    PRE:
-        -recette est une objet RECETTE correspond a la recette choisie. 
-        -nombre_personne est un entier provenant de la classe CAMP correspond au nombre total de personne presente au camp.  
-    POST:
-        -retourne un dictionnaire contenant chaque nom d'ingredient present dans la recette et la quantite a acheter pour la recette choisie en fonction du nombre de personnes presentes.
-        -si nombre de personne est 0, retourne un message d'erreur disant que personne n'est present au camp.
-    '''
-    if nombre_personnes == 0:
-        return "Aucune personne n'est présente au camp."
-    quantites= {}
-    for ingredient in recette.ingredient:
-        quantite_totale = ingredient.paquets * nombre_personnes
-        quantites[ingredient.nom] = quantite_totale
-    return quantites
-
-print(calcul_quantite(recette_choisi, camp.nb_personnes_total))
+print(menu.calcul_quantite(recette_choisi, camp.nb_personnes_total))
+ 
