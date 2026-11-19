@@ -1,40 +1,104 @@
 #fichier contenant le script
 from classe import Recette, Ingredient, Camp, Menu
 import json
+import  tkinter as tk
 
-#fait par nathan
-nbr_personnes = int(input("Combien de personnes vont au camp ? : "))
-if nbr_personnes <= 0:
-    raise ValueError("Aucune personne n'est présente au camp.")
-camp= Camp(nb_personnes_total = nbr_personnes)
+def nb_personnes() -> None:
+    
+    nbr_personnes = int(champ_personnes.get().strip())
 
-#fait par Hatim
-# ajout tempo recette
-menu = Menu()
+    if nbr_personnes <= 0:
+        raise ValueError("Aucune personne n'est présente au camp.")
 
-fichier = open("recette.json", "r")
-donnees = json.load(fichier)
-recettes = donnees.get("recette", [])
+    global camp
+    camp = Camp(nb_personnes_total = nbr_personnes)
 
-compteur = 0
-for i in recettes : 
-    menu.ajout_recette(i, recettes[i][0])
-    for j in recettes[i][1:]:
-        menu.all_recette[compteur].ajout_ingredient(j["nom"], j["prix"], j["paquets"], j["est_frais"])
-    compteur += 1    
+    affichage_recette()
 
-compteur_recette_numero = 1
-for i in menu.all_recette :
-    print(compteur_recette_numero , i.nom_recette)
-    compteur_recette_numero += 1
 
-chiffre_choisi = int(input("Choisir le numéro d'une recette : ")) - 1
-recette_choisi = menu.all_recette[chiffre_choisi]
 
-cout = menu.calcul_cout(recette_choisi)
 
-cout_tot = cout * camp.nb_personnes_total
-print(cout_tot)
+def affichage_recette() -> None:
+    global menu
+    menu = Menu()
 
-print(menu.calcul_quantite(recette_choisi, camp.nb_personnes_total))
+    fichier = open("recette.json", "r")
+    donnees = json.load(fichier)
+    recettes = donnees.get("recette", [])
+
+
+    compteur = 0
+    for i in recettes : 
+        menu.ajout_recette(i, recettes[i][0])
+        for j in recettes[i][1:]:
+            menu.all_recette[compteur].ajout_ingredient(j["nom"], j["prix"], j["paquets"], j["est_frais"])
+        compteur += 1    
+
+    string_recette = ""
+    compteur_recette_numero = 1
+    for i in menu.all_recette :
+        string_recette += f"{compteur_recette_numero}. {i.nom_recette}\n"
+        compteur_recette_numero += 1
+
+    resultat.config(text=string_recette)
+
+    zone_depart.pack_forget()
+    fin_affichage()
+
+
+def recette_choisi() -> None:
+
+    chiffre_choisi = int(choix_recette.get().strip()) - 1
+    recette_choisi = menu.all_recette[chiffre_choisi]
+
+    cout = menu.calcul_cout(recette_choisi)
+
+    cout_tot = cout * camp.nb_personnes_total
+    quantite = menu.calcul_quantite(recette_choisi, camp.nb_personnes_total)
+    
+    resultat_cout.config(text=f"Coût total : {cout_tot}")
+    resultat_quantite.config(text=f"Quantité nécessaire : {quantite}")
  
+
+
+if __name__ == "__main__":
+    fenetre = tk.Tk()
+    fenetre.title("Intedance Scout")
+
+    zone_depart = tk.Frame(fenetre)
+    zone_depart.pack(padx=20, pady=25)
+
+    champ_personnes = tk.Entry(zone_depart, width=20)
+    champ_personnes.pack(side="left", padx=50)
+
+    bouton_personne = tk.Button(zone_depart, text="Valider", command=nb_personnes)
+    bouton_personne.pack(side="left", padx=50)
+
+
+
+
+    resultat = tk.Label(fenetre, text="")
+    resultat.pack(padx=10, pady=10)
+
+    def fin_affichage() -> None:
+        global choix_recette, resultat_cout, resultat_quantite
+
+        zone_milieux_haute = tk.Frame(fenetre)
+        zone_milieux_haute.pack(padx=20, pady=25)
+
+        choix_recette = tk.Entry(zone_milieux_haute, width=20)
+        choix_recette.pack(side="left", padx=50)
+
+        bouton_recette = tk.Button(zone_milieux_haute, text="Valider", command=recette_choisi)
+        bouton_recette.pack(side="left", padx=50)
+
+
+        resultat_cout = tk.Label(fenetre, text="")
+        resultat_cout.pack(padx=10, pady=10)
+
+        resultat_quantite = tk.Label(fenetre, text="")
+        resultat_quantite.pack(padx=10, pady=10)
+    fenetre.mainloop()
+
+
+
