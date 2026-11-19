@@ -34,7 +34,7 @@ def affichage_recette() -> None:
             menu.all_recette[compteur].ajout_ingredient(j["nom"], j["prix"], j["paquets"], j["est_frais"])
         compteur += 1    
 
-    string_recette = ""
+    string_recette = "Rette disponible :\n \n"
     compteur_recette_numero = 1
     for i in menu.all_recette :
         string_recette += f"{compteur_recette_numero}. {i.nom_recette}\n"
@@ -65,14 +65,18 @@ if __name__ == "__main__":
     fenetre = tk.Tk()
     fenetre.title("Intedance Scout")
 
+
     zone_depart = tk.Frame(fenetre)
     zone_depart.pack(padx=20, pady=25)
 
-    champ_personnes = tk.Entry(zone_depart, width=20)
-    champ_personnes.pack(side="left", padx=50)
+    phrase_personnes = tk.Label(zone_depart, text="Combien de personnes sont présentes au camp ? \n")
+    phrase_personnes.pack(side="top", padx=20)
+
+    champ_personnes = tk.Entry(zone_depart, width=25)
+    champ_personnes.pack(side="left", padx=25)
 
     bouton_personne = tk.Button(zone_depart, text="Valider", command=nb_personnes)
-    bouton_personne.pack(side="left", padx=50)
+    bouton_personne.pack(side="left", padx=10)
 
 
 
@@ -86,11 +90,14 @@ if __name__ == "__main__":
         zone_milieux_haute = tk.Frame(fenetre)
         zone_milieux_haute.pack(padx=20, pady=25)
 
+        phrase_recette = tk.Label(zone_milieux_haute, text="Quelle recette souhaitez-vous réaliser ? \n")
+        phrase_recette.pack(side="top", padx=20)
+
         choix_recette = tk.Entry(zone_milieux_haute, width=20)
-        choix_recette.pack(side="left", padx=50)
+        choix_recette.pack(side="left", padx=25)
 
         bouton_recette = tk.Button(zone_milieux_haute, text="Valider", command=recette_choisi)
-        bouton_recette.pack(side="left", padx=50)
+        bouton_recette.pack(side="left", padx=25)
 
 
         resultat_cout = tk.Label(fenetre, text="")
