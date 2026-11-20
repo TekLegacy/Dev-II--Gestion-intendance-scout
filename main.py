@@ -34,7 +34,7 @@ def affichage_recette() -> None:
             menu.all_recette[compteur].ajout_ingredient(j["nom"], j["prix"], j["paquets"], j["est_frais"])
         compteur += 1    
 
-    string_recette = "Rette disponible :\n \n"
+    string_recette = "Recettes disponible :\n \n"
     compteur_recette_numero = 1
     for i in menu.all_recette :
         string_recette += f"{compteur_recette_numero}. {i.nom_recette}\n"
@@ -90,7 +90,7 @@ if __name__ == "__main__":
         zone_milieux_haute = tk.Frame(fenetre)
         zone_milieux_haute.pack(padx=20, pady=25)
 
-        phrase_recette = tk.Label(zone_milieux_haute, text="Quelle recette souhaitez-vous réaliser ? \n")
+        phrase_recette = tk.Label(zone_milieux_haute, text="Numéro de la recette souhaitée : \n")
         phrase_recette.pack(side="top", padx=20)
 
         choix_recette = tk.Entry(zone_milieux_haute, width=20)
