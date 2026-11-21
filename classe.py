@@ -323,7 +323,7 @@ class Menu:
 
         temporaire = []
         for i in self.__all_recette:
-            if i != old_recette:
+            if i.nom_recette != old_recette:
                 temporaire.append(i)
         if len(temporaire) < len(self.__all_recette):
             self.__all_recette = temporaire
