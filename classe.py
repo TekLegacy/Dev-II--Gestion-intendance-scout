@@ -20,7 +20,7 @@ class Camp:
         self.__nb_pers_tranche = nb_pers_tranche
         self.__budget = self.__nb_jours * self.__nb_personnes_total * self.__budget_jour_personne
 
-    @property
+
     def calcule_portion(self):
 
         '''
@@ -35,9 +35,30 @@ class Camp:
         '''
         portion = self.__nb_pers_tranche[0] * 0.8 + self.__nb_pers_tranche[1] * 1 + self.__nb_pers_tranche[2] * 1.1
         return portion
+    
+    @property
+    def budget(self) -> float:
+        return self.__budget 
 
-    @__budget.setter
-    def deduire_cout(self, cout):
+    @property
+    def nb_personnes_total(self) -> int:
+        return self.__nb_personnes_total
+    
+    @property
+    def nb_jours(self) -> int:
+        return self.__nb_jours
+
+    @property
+    def budget_jour_personne(self) -> float:
+        return self.__budget_jour_personne
+    
+    @property
+    def nb_pers_tranche(self) -> list:
+        return self.__nb_pers_tranche
+    
+
+    @budget.setter
+    def deduire_cout(self, cout) -> None:
         '''
         Déduit le coût d'une recette du budget total du camp.
 
@@ -52,13 +73,13 @@ class Camp:
         if self.budget >= cout:
             self.budget -= cout
         else:
-            print("Budget insuffisant pour déduire ce coût.") 
+            raise ValueError("Budget insuffisant pour déduire ce coût.") 
 
 
 
 
 class Recette:
-    def __init__(self, nom_recette : str, nbr_ingredients : int):
+    def __init__(self, nom_recette : str, nbr_ingredients : int) -> None:
         ''' 
         Constructeur de la classe Recette. 
 
@@ -70,12 +91,24 @@ class Recette:
             - Un object Recette est crée avec les 2 attributs valide correspondant aux arguments nom_recette et nbr_ingrédients 
             ainsi qu'une liste "ingrédient" initialisé à vide. 
         '''
-        self.nom_recette = nom_recette
-        self.nbr_ingredients = nbr_ingredients
+        self.__nom_recette = nom_recette
+        self.__nbr_ingredients = nbr_ingredients
 
-        self.ingredient = []
+        self.__ingredient = []
 
-    def ajout_ingredient(self, nom, prix, paquet, est_frais):
+    @property
+    def nom_recette(self) -> str:
+        return self.__nom_recette
+
+    @property
+    def nbr_ingredients(self) -> int:
+        return self.__nbr_ingredients
+
+    @property
+    def ingredient(self) -> list:
+        return self.__ingredient
+
+    def ajout_ingredient(self, nom, prix, paquet, est_frais) -> str:
         """
         Crée un nouvelle objet ingrédient et l'ajoute à la liste ingrédients
 
@@ -86,21 +119,26 @@ class Recette:
             - est_frais est un booléen
 
         POST:
-            - ne retourne rien
+            - retourne un string validant l'ajout de l'ingrédient ou non
             - si la liste Ingrédient fait le taille de nbr_ingredients, 
             rajoute le nouvel ingrédient à la liste et augmente nbr_ingrédients de 1
             - si la taille de la liste ingrédient est plus petite que nbr_ingrédients, 
             rajoute le nouvel ingrédient à la liste
         """
+        for i in self.__ingredient:
+            if i.nom == nom:
+                return f"L'ingrédient {nom} est déjà dans le recette"
         ing = Ingredient(nom, prix, paquet, est_frais)
-        if len(self.ingredient) < self.nbr_ingredients:
-            self.ingredient.append(ing)
+        if len(self.__ingredient) < self.__nbr_ingredients:
+            self.__ingredient.append(ing)
+            return f"L'ingrédient {nom} à bien été ajouté à la recette"
         else:
-            self.ingredient.append(ing)
-            self.nbr_ingredients += 1
+            self.__ingredient.append(ing)
+            self.__nbr_ingredients += 1
+            return f"L'ingrédient {nom} à bien été ajouté à la recette"
         
 
-    def supprimer_ingredient(self, ingre):
+    def supprimer_ingredient(self, ingre) -> str:
         """
         Supprime l'ingrédient avec le nom "ingre" de la liste ingrédient
 
@@ -109,23 +147,31 @@ class Recette:
             - la liste ingrédient ne peut pas être vide
 
         POST:
-            - ne retourne rien
+            - retourne un string confirmant ou non la suppression de l'ingrédient de la recette
             - supprime l'ingrédient de la liste
             - si l'ingrédient n'est pas dans la liste, ne fait rien
         """
+        found = False
+        for i in self.__ingredient:
+            if i.nom == ingre:
+                found = True
+        if not found:
+            return f"L'ingrédient {ingre} n'est pas dans la recette"
+
         temp_l = []
-        for i in self.ingredient:
+        for i in self.__ingredient:
             if i.nom != ingre:
                 temp_l.append(i)
-        self.ingredient = temp_l
-        self.nbr_ingredients = len(temp_l)
+        self.__ingredient = temp_l
+        self.__nbr_ingredients = len(temp_l)
+        return f"L'ingrédient {ingre} à bien été supprimé de la recette"
 
-    def __str__(self):
-        return f"La recette {self.nom_recette} contient {self.nbr_ingredients} ingrédients."
+    def __str__(self) -> str:
+        return f"La recette {self.__nom_recette} contient {self.__nbr_ingredients} ingrédients."
 
         
 class Ingredient : 
-    def __init__(self,nom : str, prix : float, paquets : int, est_frais : bool):
+    def __init__(self,nom : str, prix : float, paquets : int, est_frais : bool) -> None:
         ''' 
         Constructeur de la classe Ingredient. 
 
@@ -133,7 +179,7 @@ class Ingredient :
             - nom est une chaîne de caractères représentant le nom de l'ingrédient 
                 Attention: le nom ne peut pas etre une chaine vide
             - prix est un nombre flottant représentant le prix de l'ingrédient 
-                Attention: le prix doit etre plus grand ou egal a 0     
+                Attention: le prix doit etre plus grand que 0     
             - paquets est un entier représentant le nombre de paquets de l'ingrédient 
                 Attention: le nombre de paquets doit etre plus grand ou egal a 1 
             - est_frais est un booléen indiquant si l'ingrédient est frais ou non
@@ -141,18 +187,39 @@ class Ingredient :
         Post:
             - Un object Ingredient est crée avec les quattre attributs valide correspond aux argument nom, prix, paquets et est_frais. 
         '''
+        self.__nom = nom
+        self.__prix = prix
+        self.__paquets = paquets
+        self.__est_frais = est_frais
 
-        self.nom = nom
-        self.prix = prix
-        self.paquets = paquets
-        self.est_frais = est_frais
+    @property
+    def nom(self) -> str:
+        return self.__nom
 
-    def __str__(self):
+    @property
+    def prix(self) -> float:
+        return self.__prix
+        
+    @property
+    def paquets(self) -> int:
+        return self.__paquets
+
+    @property
+    def est_frais(self) -> bool:
+        return self.__est_frais
+
+    @prix.setter
+    def prix(self, prix : float) -> None:
+        if prix <= 0:
+            raise ValueError("Le prix de l'ingrédient doit être supérieur à 0.")
+        self.__prix = prix
+
+    def __str__(self) -> str:
         return f"L'ingrédient : {self.nom} coûte {self.prix}, s'achète par paquet de {self.paquets}, est frais : {self.est_frais}"   
 
 
 class Menu:
-    def __init__(self):
+    def __init__(self) -> None:
         '''
         Constructeur de la classe Menu.
         
@@ -162,9 +229,13 @@ class Menu:
             - Creer un objet Menu avec la liste all_recette initilisé a vide.
          
         '''
-        self.all_recette = []
+        self.__all_recette = []
 
-    def calcul_cout(self,recette):
+    @property
+    def all_recette(self) -> list:
+        return self.__all_recette
+
+    def calcul_cout(self,recette) -> float:
         """
         Calcule le coût total des ingrédients d'une recette
 
@@ -182,11 +253,14 @@ class Menu:
 
         """
         cout = 0
-        for i in recette.ingredient:
-            cout += i.prix
-        return cout
+        if len(recette.ingredient) == 0:
+            return cout
+        else : 
+            for i in recette.ingredient:
+                cout += i.prix * i.paquets
+            return cout
 
-    def contient_frais(self, recette):
+    def contient_frais(self, recette) -> bool:
         """
         Indique si la recette contient au minimum un ingrédient frais
 
@@ -210,21 +284,27 @@ class Menu:
             
         return False
 
-    def ajout_recette(self, new_recette):
+    def ajout_recette(self, nom_recette, nbr_ingredient) -> str:
         """
+        (Antonin)
         Ajout d'une recette au menu. 
 
         PRE:
-            -new_recettte est un objet Recette qui correspond a la recette que l'on veut ajouter. 
-        
-        POST: 
-            -si new_recette existe deja aux menu on retourne 'erreur'.  (EXCEPTION ValueError)
-            -si new_recette n'existe pas au menu on l'ajoute et on retourne 'La recette a bien été ajouté au menu'   
-        """
-        self.all_recette.append(new_recette)
-        return 'La recette a bien été ajouté au menu'
+            - nom_recette est une chaîne de caractères
+            - nbr_ingredient est un entier positif
 
-    def supprime_recette(self, old_recette):
+        POST: 
+            - si une recette avec le même nom existe déjà dans le menu, retourne 'erreur'.  (EXCEPTION ValueError)
+            - si aucune recette avec ce nom n'existe pas dans le menu, crée une nouvelle recette et la retourne
+        """
+        for i in self.__all_recette : 
+            if i.nom_recette == nom_recette:
+                raise ValueError("La recette existe déjà dans le menu.")
+        new_recette = Recette(nom_recette, nbr_ingredient)
+        self.__all_recette.append(new_recette)
+        return 'La recette a bien été ajouté au menu'
+ 
+    def supprime_recette(self, old_recette) -> str:
         """
         Suppression d'une recette du menu
 
@@ -242,13 +322,30 @@ class Menu:
         """
 
         temporaire = []
-        for i in self.all_recette:
-            if i != old_recette:
+        for i in self.__all_recette:
+            if i.nom_recette != old_recette:
                 temporaire.append(i)
-        if len(temporaire) < len(self.all_recette):
-            self.all_recette = temporaire
+        if len(temporaire) < len(self.__all_recette):
+            self.__all_recette = temporaire
             return "La recette a bien ete supprime de la liste"
-        return 'erreur'
+        raise ValueError("La recette n'existe pas dans le menu")
 
-    def __str__(self): # en cours
-        return f"Le menu contient {len(self.all_recette)} recettes"
+    def calcul_quantite(self, recette, nombre_personnes) -> dict: 
+        '''
+        Calcul la quantite total d'ingredient pour une recette choisie. 
+        
+        PRE:
+            -recette est une objet RECETTE correspond a la recette choisie. 
+            -nombre_personne est un entier provenant de la classe CAMP correspond au nombre total de personne presente au camp.  
+        POST:
+            -retourne un dictionnaire contenant chaque nom d'ingredient present dans la recette et la quantite a acheter pour la recette choisie en fonction du nombre de personnes presentes.
+            -si nombre de personne est 0, retourne un message d'erreur disant que personne n'est present au camp.
+        '''
+        quantites= {}
+        for ingredient in recette.ingredient: 
+            quantite_totale = ingredient.paquets * nombre_personnes
+            quantites[ingredient.nom] = quantite_totale
+        return quantites
+
+    def __str__(self) -> str: # en cours
+        return f"Le menu contient {len(self.__all_recette)} recettes"
