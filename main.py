@@ -125,7 +125,7 @@ if __name__ == "__main__":
         resultat_quantite = tk.Label(zone_bas, text="")
         resultat_quantite.pack(padx=10, pady=10)
 
-        bouton_recommencer = tk.Button(zone_bas, text="Recommencer", command=recommancer)
+        bouton_recommencer = tk.Button(zone_bas, text="Changez le nombre de personnes", command=recommancer)
         bouton_recommencer.pack(side="top", pady=10)
         
         bouton_quitter = tk.Button(zone_bas, text="Quitter", command=fenetre.destroy)
