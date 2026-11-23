@@ -74,7 +74,7 @@ def recette_choisi() -> None:
     affichage_quantite = "Quantité nécessaire :\n"
 
     for i in quantite:
-        affichage_quantite += f"{i} : {quantite[i]} \n"
+        affichage_quantite += f"{i} : {quantite[i]}\n"
     
     resultat_cout.config(text=f"Coût total : {cout_tot}")
     resultat_quantite.config(text=f"{affichage_quantite}")
@@ -108,6 +108,8 @@ if __name__ == "__main__":
 
     def fin_affichage() -> None:
         global choix_recette, resultat_cout, resultat_quantite, zone_bas, zone_milieux_haute
+
+        zone_recette.pack(padx=20, pady=25)
 
         zone_milieux_haute = tk.Frame(fenetre)
         zone_milieux_haute.pack(padx=20, pady=25)
