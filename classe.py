@@ -349,3 +349,4 @@ class Menu:
 
     def __str__(self) -> str: # en cours
         return f"Le menu contient {len(self.__all_recette)} recettes"
+
