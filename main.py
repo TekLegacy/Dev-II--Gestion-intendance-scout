@@ -46,7 +46,7 @@ def affichage_recette() -> None:
     fin_affichage()
 
 
-def recommancer() -> None:
+def recommencer() -> None:
     zone_bas.forget()
     zone_milieux_haute.forget()
     champ_personnes.delete(0, tk.END)
@@ -70,9 +70,14 @@ def recette_choisi() -> None:
 
     cout_tot = cout * camp.nb_personnes_total
     quantite = menu.calcul_quantite(recette_choisi, camp.nb_personnes_total)
+
+    affichage_quantite = "Quantité nécessaire :\n"
+
+    for i in quantite:
+        affichage_quantite += f"{i} : {quantite[i]} \n"
     
     resultat_cout.config(text=f"Coût total : {cout_tot}")
-    resultat_quantite.config(text=f"Quantité nécessaire : {quantite}")
+    resultat_quantite.config(text=f"{affichage_quantite}")
  
 
 
@@ -125,7 +130,7 @@ if __name__ == "__main__":
         resultat_quantite = tk.Label(zone_bas, text="")
         resultat_quantite.pack(padx=10, pady=10)
 
-        bouton_recommencer = tk.Button(zone_bas, text="Changez le nombre de personnes", command=recommancer)
+        bouton_recommencer = tk.Button(zone_bas, text="Changez le nombre de personnes", command=recommencer)
         bouton_recommencer.pack(side="top", pady=10)
         
         bouton_quitter = tk.Button(zone_bas, text="Quitter", command=fenetre.destroy)
