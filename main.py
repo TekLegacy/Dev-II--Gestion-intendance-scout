@@ -49,6 +49,8 @@ def affichage_recette() -> None:
 def recette_choisi() -> None:
 
     chiffre_choisi = int(choix_recette.get().strip()) - 1
+    if chiffre_choisi < 0 or chiffre_choisi >= len(menu.all_recette):
+        raise ValueError(f"La recette {chiffre_choisi + 1} n'existe pas")
     recette_choisi = menu.all_recette[chiffre_choisi]
 
     cout = menu.calcul_cout(recette_choisi)
