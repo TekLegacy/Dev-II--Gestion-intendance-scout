@@ -46,6 +46,19 @@ def affichage_recette() -> None:
     fin_affichage()
 
 
+def recommancer() -> None:
+    zone_bas.forget()
+    zone_milieux_haute.forget()
+    champ_personnes.delete(0, tk.END)
+    choix_recette.delete(0, tk.END)
+    resultat.config(text="")
+    resultat_cout.config(text="")
+    resultat_quantite.config(text="")
+    zone_recette.pack_forget()
+
+    zone_depart.pack(side="top", padx=20, pady=25)
+
+
 def recette_choisi() -> None:
 
     chiffre_choisi = int(choix_recette.get().strip()) - 1
@@ -82,12 +95,14 @@ if __name__ == "__main__":
 
 
 
+    zone_recette = tk.Frame(fenetre)
+    zone_recette.pack(padx=20, pady=25)
 
-    resultat = tk.Label(fenetre, text="")
+    resultat = tk.Label(zone_recette, text="")
     resultat.pack(padx=10, pady=10)
 
     def fin_affichage() -> None:
-        global choix_recette, resultat_cout, resultat_quantite
+        global choix_recette, resultat_cout, resultat_quantite, zone_bas, zone_milieux_haute
 
         zone_milieux_haute = tk.Frame(fenetre)
         zone_milieux_haute.pack(padx=20, pady=25)
@@ -101,12 +116,21 @@ if __name__ == "__main__":
         bouton_recette = tk.Button(zone_milieux_haute, text="Valider", command=recette_choisi)
         bouton_recette.pack(side="left", padx=25)
 
+        zone_bas = tk.Frame(fenetre)
+        zone_bas.pack(padx=20, pady=25)
 
-        resultat_cout = tk.Label(fenetre, text="")
+        resultat_cout = tk.Label(zone_bas, text="")
         resultat_cout.pack(padx=10, pady=10)
 
-        resultat_quantite = tk.Label(fenetre, text="")
+        resultat_quantite = tk.Label(zone_bas, text="")
         resultat_quantite.pack(padx=10, pady=10)
+
+        bouton_recommencer = tk.Button(zone_bas, text="Changez le nombre de personnes", command=recommancer)
+        bouton_recommencer.pack(side="top", pady=10)
+        
+        bouton_quitter = tk.Button(zone_bas, text="Quitter", command=fenetre.destroy)
+        bouton_quitter.pack(side="top", pady=10)
+  
     fenetre.mainloop()
 
 
